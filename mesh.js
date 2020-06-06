@@ -49,10 +49,10 @@
             [' ', 'mesh broadcast %s', 'broadcast'],
             ['h', 'when I receive mesh %s', 'mesh_hat']
         ],
-        url: 'http://technoboy10.tk/mesh'
+        url: 'https://github.com/lightwavebusiness/mesh2/blob/master/mesh.js'
     };
 
 
     // Register the extension
-    ScratchExtensions.register('Mesh', descriptor, ext);
+    ScratchExtensions.register('Mesh2', descriptor, ext);
 })({});
