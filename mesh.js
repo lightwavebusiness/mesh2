@@ -1,6 +1,10 @@
 (function(ext) {
     // TODO: public repo + documentation + samples
     // GH pages
+
+    var usersRef;
+    var messagesRef;
+    
     $.ajax({
 
         async:false,
@@ -13,7 +17,12 @@
         
         success: function(){
             fb = new Firebase('https://mle-ict-chat.firebaseio.com');
-            console.log('ok');}, //Create a firebase reference
+            console.log('ok');
+        
+
+            usersRef = fb.child('users')
+            messagesRef = fb.child('messages')
+        }, //Create a firebase reference
 
         dataType:'script'
 
@@ -37,12 +46,36 @@
     };
     
     ext.mesh_hat = function(name) {
-        fb.child('broadcasts/' + name).on('value', function(snap){window['new-' + name] = snap.val();console.log(name);}); // Make sure broadcasts are unique (don't activate twice)
+        fb.child('broadcasts/' + name).on('value', function(snap){
+            window['new-' + name] = snap.val();
+            console.log(name);
+        }); 
+        
+        // Make sure broadcasts are unique (don't activate twice)
         if(window['last-' + name] != window['new-' + name] && window['new-' + name] != window['sent-' + name]){
             window['last-' + name] = window['new-' + name];
             return true;
         } else {
             return false;
+        }
+    }
+
+    ext.messageSend = function() {
+
+    }
+
+    ext.set_name = function(name) {
+        if(!window['uid']) {
+            window['uid'] =  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        if(name.length > 0 ){
+            userRef.child(window['uid']).set({
+                name: name,
+                dateSet: Date.now()
+            })
         }
     }
 
@@ -72,8 +105,8 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            [' ', 'mesh broadcast %s', 'broadcast'],
-            ['h', 'when I receive mesh %s', 'mesh_hat']
+            [' ', 'mesh broadcast %sb', 'broadcast'],
+            ['h', 'when I receive mesh %s', 'mesh_hat'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
