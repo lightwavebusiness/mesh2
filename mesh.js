@@ -36,21 +36,50 @@
         }
     };
     
-   ext.mesh_hat = function(name) {
-       fb.child('broadcasts/' + name).on('value', function(snap){window['new-' + name] = snap.val();console.log(name);}); // Make sure broadcasts are unique (don't activate twice)
-       if(window['last-' + name] != window['new-' + name] && window['new-' + name] != window['sent-' + name]){
-           window['last-' + name] = window['new-' + name];
-           return true;
-       } else {
-           return false;
-       }
-   }
+    ext.mesh_hat = function(name) {
+        fb.child('broadcasts/' + name).on('value', function(snap){window['new-' + name] = snap.val();console.log(name);}); // Make sure broadcasts are unique (don't activate twice)
+        if(window['last-' + name] != window['new-' + name] && window['new-' + name] != window['sent-' + name]){
+            window['last-' + name] = window['new-' + name];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*function _get_voices() {
+        var ret = [];
+        var voices = speechSynthesis.getVoices();
+        
+        for(var i = 0; i < voices.length; i++ ) {
+            ret.push(voices[i].name);
+            console.log(voices.toString());
+        }
+        return ret;
+    }
+
+    ext.set_voice = function() {
+    };*/
+
+    ext.speak_text = function (text, callback) {
+        var u = new SpeechSynthesisUtterance(text.toString());
+        u.onend = function(event) {
+            if (typeof callback=="function") callback();
+        };
+        
+        speechSynthesis.speak(u);
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             [' ', 'mesh broadcast %s', 'broadcast'],
             ['h', 'when I receive mesh %s', 'mesh_hat']
+            //['', 'set voice to %m.voices', 'set_voice', ''],
+            ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
+        /*menus: {
+            voices: _get_voices(),
+        },*/
         url: 'https://github.com/lightwavebusiness/mesh2/blob/master/mesh.js'
     };
 
