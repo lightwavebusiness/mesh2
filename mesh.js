@@ -112,7 +112,7 @@
             [' ', 'mesh broadcast %s', 'broadcast'],
             [' ', 'Set my name %s', 'set_name'],
             ['h', 'when I receive mesh %s', 'mesh_hat'],
-            ['r', 'whats my name', 'get_my_name']
+            ['r', 'whats my name', 'get_my_name'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
