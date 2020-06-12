@@ -73,7 +73,7 @@
     var descriptor = {
         blocks: [
             [' ', 'mesh broadcast %s', 'broadcast'],
-            ['h', 'when I receive mesh %s', 'mesh_hat']
+            ['h', 'when I receive mesh %s', 'mesh_hat'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
