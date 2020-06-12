@@ -11,7 +11,9 @@
 
         data:null,
         
-        success: function(){fb = new Firebase('https://scratchx.firebaseio.com');console.log('ok');}, //Create a firebase reference
+        success: function(){
+            fb = new Firebase('https://mle-ict-chat.firebaseio.com');
+            console.log('ok');}, //Create a firebase reference
 
         dataType:'script'
 
