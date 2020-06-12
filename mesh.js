@@ -72,11 +72,15 @@
             });
         }
         if(name.length > 0 ){
-            userRef.child(window['uid']).set({
-                name: name,
-                dateSet: Date.now()
-            })
+            fb.child('users/'+window['uid']).set({ name: name, dateSet: Date.now() })
         }
+    }
+
+    ext.get_my_name = function() {
+        fb.child('users/'+window['uid']).on('value', function(snapshot) {
+            var user = snapshot.val();
+            return user;
+        })
     }
 
     /*function _get_voices() {
@@ -108,6 +112,7 @@
             [' ', 'mesh broadcast %s', 'broadcast'],
             [' ', 'Set my name %s', 'set_name'],
             ['h', 'when I receive mesh %s', 'mesh_hat'],
+            ['r', 'whats my name', 'get_my_name']
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
