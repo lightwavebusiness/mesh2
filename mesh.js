@@ -105,7 +105,8 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            [' ', 'mesh broadcast %sb', 'broadcast'],
+            [' ', 'mesh broadcast %s', 'broadcast'],
+            [' ', 'Set my name %s', 'set_name'],
             ['h', 'when I receive mesh %s', 'mesh_hat'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
