@@ -1,9 +1,6 @@
 (function(ext) {
     // TODO: public repo + documentation + samples
     // GH pages
-
-    var usersRef;
-    var messagesRef;
     
     $.ajax({
 
@@ -18,10 +15,6 @@
         success: function(){
             fb = new Firebase('https://mle-ict-chat.firebaseio.com');
             console.log('ok');
-        
-
-            usersRef = fb.child('users')
-            messagesRef = fb.child('messages')
         }, //Create a firebase reference
 
         dataType:'script'
@@ -77,6 +70,9 @@
     }
 
     ext.get_my_name = function() {
+        if(!window['uid']) 
+            return;
+
         fb.child('users/'+window['uid']).on('value', function(snapshot) {
             var user = snapshot.val();
             return user;
