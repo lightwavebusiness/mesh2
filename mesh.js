@@ -77,6 +77,7 @@
     ext.messageReceived = function(callback) {
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             let message = snapshot.val()
+            console.log("Received: ", message)
             window["new-message"] = message
    
         });
@@ -93,7 +94,7 @@
 
         let message = window["new-message"];
         window["new-message"] = null;
-
+        console.log("Current Received: ", message)
         callback(message);
     }
 
