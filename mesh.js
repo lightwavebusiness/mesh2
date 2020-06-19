@@ -83,7 +83,7 @@
     ext.messageReceived = function() {
         if(!window["new-message-id"])
             return false
-            
+        window["latest-id"] = window["new-message-id"]
         window["new-message-id"] = null;
         return true
     }
@@ -152,7 +152,7 @@
             ['h', 'when I receive mesh %s', 'mesh_hat'],
             ['R', 'whats my name', 'get_my_name'],
             ['h', 'When new message receieved', 'messageReceived'],
-            ['R', 'current message', 'currentMessage'],
+            ['r', 'current message', 'currentMessage'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
