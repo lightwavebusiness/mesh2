@@ -78,10 +78,13 @@
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             let message = snapshot.val()
             window["new-message"] = message
-            return true
+   
         });
 
-        return false
+        if(!window["new-message"])
+            return false
+
+        return true
     }
 
     ext.currentMessage = function(callback) {
