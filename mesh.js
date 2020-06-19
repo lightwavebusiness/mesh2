@@ -15,6 +15,12 @@
         success: function(){
             fb = new Firebase('https://mle-ict-chat.firebaseio.com');
             console.log('ok');
+
+            fb.child('messages').on('child_added', function(snapshot, preChildKey) {
+                let message = snapshot.val()
+                window["new-message-"+message.id] = message
+                window["new-message-id"] = message.id
+            });
         }, //Create a firebase reference
 
         dataType:'script'
@@ -75,12 +81,6 @@
     }
 
     ext.messageReceived = function(callback) {
-        fb.child('messages').on('child_added', function(snapshot, preChildKey) {
-            let message = snapshot.val()
-            window["new-message-"+message.id] = message
-            window["new-message-id"] = message.id
-        });
-
         if(!window["new-message-id"])
             return false
 
@@ -151,7 +151,7 @@
             ['h', 'when I receive mesh %s', 'mesh_hat'],
             ['R', 'whats my name', 'get_my_name'],
             ['h', 'When new message receieved', 'messageReceived'],
-            ['r', 'current message', 'currentMessage'],
+            ['R', 'current message', 'currentMessage'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
