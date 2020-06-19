@@ -78,24 +78,24 @@
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             let message = snapshot.val()
             window["new-message-"][message.id] = message
-            window["new-message"] = message.id
+            window["new-message-id"] = message.id
         });
 
-        if(!window["new-message"])
+        if(!window["new-message-id"])
             return false
 
         return true
     }
 
     ext.currentMessage = function(callback) {
-        console.log("Current Received: ", window["new-message"])
-        if(!window["new-message"])
+        console.log("Current Received: ", window["new-message-id"])
+        if(!window["new-message-id"])
          return
 
-        let message = window["new-message"];
-        window["new-message"] = null;
+        let messageID = window["new-message-id"];
+        window["new-message-id"] = null;
 
-        callback(message.message);
+        callback(messageID);
     }
 
     ext.set_name = function(name) {
