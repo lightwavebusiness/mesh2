@@ -14,7 +14,7 @@
         
         success: function(){
             fb = new Firebase('https://mle-ict-chat.firebaseio.com');
-            console.log('ok');
+            //onsole.log('ok');
 
             fb.child('messages').on('child_added', function(snapshot, preChildKey) {
                 let message = snapshot.val()
@@ -37,28 +37,6 @@
         return {status: 2, msg: 'Ready'};
     };
     
-    ext.broadcast = function(name) {
-        if (name.length > 0){ // blank broadcasts break firebase - not nice.
-        window['sent-' + name] = Math.random(); // HUGE thanks to the folks at White Mountain Science for fixing the multiple broadcast bug! (lines 32-40)
-        fb.child('broadcasts/' + name).set(window['sent-' + name]); //Change value of broadcast so other clients get an update
-        }
-    };
-    
-    ext.mesh_hat = function(name) {
-        fb.child('broadcasts/' + name).on('value', function(snap){
-            window['new-' + name] = snap.val();
-            console.log(name);
-        }); 
-        
-        // Make sure broadcasts are unique (don't activate twice)
-        if(window['last-' + name] != window['new-' + name] && window['new-' + name] != window['sent-' + name]){
-            window['last-' + name] = window['new-' + name];
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     ext.messageSend = function(message) {
         if(!message || message.length < 0)
             return;
@@ -89,7 +67,7 @@
     }
 
     ext.currentMessage = function(callback) {
-        console.log("Current Received: ", window["latest-id"])
+      //  console.log("Current Received: ", window["latest-id"])
         if(!window["latest-id"])
          return
 
@@ -149,10 +127,9 @@
         blocks: [
             [' ', 'Send Message %s', 'messageSend'],
             [' ', 'Set my name %s', 'set_name'],
-            ['h', 'when I receive mesh %s', 'mesh_hat'],
             ['R', 'whats my name', 'get_my_name'],
             ['h', 'When new message receieved', 'messageReceived'],
-            ['r', 'current message', 'currentMessage'],
+            ['R', 'current message', 'currentMessage'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
