@@ -102,7 +102,7 @@
         })
     }
 
-    /*function _get_voices() {
+    function _get_voices() {
         var ret = [];
         var voices = speechSynthesis.getVoices();
         
@@ -114,7 +114,7 @@
     }
 
     ext.set_voice = function() {
-    };*/
+    };
 
     ext.speak_text = function (text, callback) {
         var u = new SpeechSynthesisUtterance(text.toString());
@@ -133,12 +133,12 @@
             ['R', 'whats my name', 'get_my_name'],
             ['h', 'When new message receieved', 'messageReceived'],
             ['R', 'current message', 'currentMessage'],
-            //['', 'set voice to %m.voices', 'set_voice', ''],
+            ['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
-        /*menus: {
+        menus: {
             voices: _get_voices(),
-        },*/
+        },
         url: 'https://github.com/lightwavebusiness/mesh2/blob/master/mesh.js'
     };
 
