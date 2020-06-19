@@ -91,7 +91,7 @@
         let message = window["new-message"];
         window["new-message"] = null;
 
-        return message
+        callback(message);
     }
 
     ext.set_name = function(name) {
