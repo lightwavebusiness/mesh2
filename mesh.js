@@ -69,13 +69,13 @@
         }
     }
 
-    ext.get_my_name = function() {
+    ext.get_my_name = function(callback) {
         if(!window['uid']) 
             return;
 
         fb.child('users/'+window['uid']).on('value', function(snapshot) {
             var user = snapshot.val();
-            return user.name;
+            callback(user.name);
         })
     }
 
