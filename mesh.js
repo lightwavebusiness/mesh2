@@ -71,10 +71,13 @@
         if(!window["latest-id"])
          return
 
-        let messageID = window["latest-id"];
+        let message = window["new-message-"+window["latest-id"]];
         //window["new-message-id"] = null;
-
-        callback(messageID);
+        fb.child('users/'+message.uuid).on('value', function(snapshot) {
+            var user = snapshot.val();
+            callback(user.name+": "+message.message);
+        })
+        //callback(messageID);
     }
 
     ext.set_name = function(name) {
