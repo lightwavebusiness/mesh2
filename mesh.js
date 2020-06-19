@@ -76,8 +76,22 @@
 
     ext.messageReceived = function(callback) {
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
-            callback(snapshot.val())
+            let message = snapshot.val()
+            window["new-message"] = message
+            return true
         });
+
+        return false
+    }
+
+    ext.currentMessage = function(callback) {
+        if(!window["new-message"])
+         return
+
+        let message = window["new-message"];
+        window["new-message"] = null;
+
+        return message
     }
 
     ext.set_name = function(name) {
@@ -133,6 +147,7 @@
             ['h', 'when I receive mesh %s', 'mesh_hat'],
             ['R', 'whats my name', 'get_my_name'],
             ['h', 'When new message receieved', 'messageReceived'],
+            ['r', 'current message', 'currentMessage'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
