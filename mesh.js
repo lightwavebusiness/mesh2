@@ -74,7 +74,7 @@
         fb.child('messages/' + packet.id).set(packet); //Change value of broadcast so other clients get an update
     }
 
-    ext.messageReceive = function(callback) {
+    ext.messageReceived = function(callback) {
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             callback(snapshot.val())
         });
