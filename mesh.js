@@ -77,7 +77,7 @@
     ext.messageReceived = function(callback) {
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             let message = snapshot.val()
-            window["new-message-"][message.id] = message
+            window["new-message-"+message.id] = message
             window["new-message-id"] = message.id
         });
 
