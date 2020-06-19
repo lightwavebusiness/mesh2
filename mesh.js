@@ -63,8 +63,6 @@
             return;
         }
 
-        //        if (name.length > 0){ // blank broadcasts break firebase - not nice.
-      //  window['sent-' + name] = Math.random(); // HUGE thanks to the folks at White Mountain Science for fixing the multiple broadcast bug! (lines 32-40)
         let packet = {
             id: 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -74,12 +72,12 @@
             uuid: window['uid']
         }
         fb.child('messages/' + packet.id).set(packet); //Change value of broadcast so other clients get an update
+    }
 
-
-      //  }
-
-
-        
+    ext.messageReceive = function(callback) {
+        fb.child('messages').on('child_added', function(snapshot, preChildKey) {
+            callback(snapshot.val())
+        }
     }
 
     ext.set_name = function(name) {
@@ -134,6 +132,7 @@
             [' ', 'Set my name %s', 'set_name'],
             ['h', 'when I receive mesh %s', 'mesh_hat'],
             ['R', 'whats my name', 'get_my_name'],
+            ['h', 'When new message receieved', 'messageReceived'],
             //['', 'set voice to %m.voices', 'set_voice', ''],
             ['w', 'speak %s', 'speak_text', 'Hello!'],
         ],
