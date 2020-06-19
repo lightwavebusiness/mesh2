@@ -75,7 +75,7 @@
 
         fb.child('users/'+window['uid']).on('value', function(snapshot) {
             var user = snapshot.val();
-            return user;
+            return user.name;
         })
     }
 
