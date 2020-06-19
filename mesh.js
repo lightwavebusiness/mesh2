@@ -89,12 +89,12 @@
     }
 
     ext.currentMessage = function(callback) {
-        console.log("Current Received: ", window["new-message-id"])
-        if(!window["new-message-id"])
+        console.log("Current Received: ", window["latest-id"])
+        if(!window["latest-id"])
          return
 
-        let messageID = window["new-message-id"];
-        window["new-message-id"] = null;
+        let messageID = window["latest-id"];
+        //window["new-message-id"] = null;
 
         callback(messageID);
     }
