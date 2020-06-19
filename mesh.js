@@ -83,7 +83,8 @@
     ext.messageReceived = function() {
         if(!window["new-message-id"])
             return false
-
+            
+        window["new-message-id"] = null;
         return true
     }
 
