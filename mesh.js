@@ -80,7 +80,7 @@
         fb.child('messages/' + packet.id).set(packet); //Change value of broadcast so other clients get an update
     }
 
-    ext.messageReceived = function(callback) {
+    ext.messageReceived = function() {
         if(!window["new-message-id"])
             return false
 
