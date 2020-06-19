@@ -77,7 +77,7 @@
     ext.messageReceive = function(callback) {
         fb.child('messages').on('child_added', function(snapshot, preChildKey) {
             callback(snapshot.val())
-        }
+        });
     }
 
     ext.set_name = function(name) {
