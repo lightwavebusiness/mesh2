@@ -21,6 +21,13 @@
                 window["new-message-"+message.id] = message
                 window["new-message-id"] = message.id
             });
+
+
+            fb.child('room').on('child_added', function(snapshot, prChildKey) {
+                let user = snapshot.val()
+                let room = { ...window['room'], user }
+                window['room'] = room
+            })
         }, //Create a firebase reference
 
         dataType:'script'
@@ -88,7 +95,27 @@
             });
         }
         if(name.length > 0 ){
-            fb.child('users/'+window['uid']).set({ name: name, dateSet: Date.now() })
+            let packet = {
+                id: window['uid'],
+                name: name, 
+                dateSet: Date.now() 
+            }
+
+            window['user'] = packet
+
+
+            fb.child('users/'+window['uid']).set(packet)
+
+            fb.child('room/'+window['uid']).set(packet)
+        }
+    }
+
+    ext.set_icon = function(icon) {
+        if(!window['uid']) 
+            alert("No name set.")
+
+        if(icon) {
+            
         }
     }
 
